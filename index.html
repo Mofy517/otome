@@ -1,0 +1,86 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#7b3fb8"><title>戦国乙女5 設定判別ツール</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;background:#f6f3f8;color:#222}
+header{background:#7b3fb8;color:white;padding:18px}main{max-width:720px;margin:auto;padding:12px}
+.card{background:white;border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 2px 10px #0001}
+h1{font-size:21px;margin:0}h2{font-size:17px;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:1fr 120px;gap:8px;align-items:center}
+input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px;font-size:16px}
+button{width:100%;padding:14px;border:0;border-radius:10px;font-size:16px;font-weight:bold}
+.primary{background:#7b3fb8;color:white}.clear{margin-top:8px}.note,.small{font-size:12px;color:#666;line-height:1.6}
+.result{text-align:center;font-size:25px;font-weight:bold}.bar{height:12px;background:#eee;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:#7b3fb8}
+table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #eee;text-align:left}td:last-child,th:last-child{text-align:right}.warn{background:#fff3cd}
+</style></head><body>
+<header><h1>戦国乙女5 業火を穿つ宿焔の双刃</h1><div>設定判別ツール</div></header><main>
+
+<div class="card"><h2>基本データ</h2><div class="grid">
+<label>通常時ゲーム数</label><input id="g" type="number">
+<label>AT初当たり</label><input id="at" type="number">
+<label>戦国乙女BONUS</label><input id="ob" type="number">
+</div><p class="note">AT初当たり・戦国乙女BONUSは通常時ゲーム数を分母に計算。</p></div>
+
+<div class="card"><h2>乙女アタック</h2><div class="grid">
+<label>巫女pt 0pt到達</label><input id="pt" type="number">
+<label>乙女アタック当選</label><input id="ack" type="number">
+</div><p class="note">巫女pt 0pt到達時のみ。リールロック2段階契機・カンスケ滞在は除外。</p></div>
+
+<div class="card"><h2>ボーナス終了スタンプ</h2><div class="grid">
+<label>可（設定2以上）</label><input id="s2" type="number"><label>吉（設定3以上）</label><input id="s3" type="number">
+<label>良（設定4以上）</label><input id="s4" type="number"><label>優（設定5以上）</label><input id="s5" type="number">
+<label>極（設定6）</label><input id="s6" type="number"></div></div>
+
+<div class="card"><h2>獲得枚数表示</h2><div class="grid">
+<label>222枚OVER</label><input id="m2" type="number"><label>333枚OVER</label><input id="m3" type="number">
+<label>444枚OVER</label><input id="m4" type="number"><label>555枚OVER</label><input id="m5" type="number">
+<label>666枚OVER</label><input id="m6" type="number"></div></div>
+
+<div class="card"><h2>AT終了画面</h2><div class="grid">
+<label>乙女集合・金背景</label><input id="eg" type="number">
+<label>赤背景→天国否定</label><input id="er" type="number">
+<label>4人組→通常A</label><input id="e4" type="number"></div>
+<p class="note">金背景＝設定2以上。赤背景は天国否定で設定4以上。イエヤス・シンゲン・カンスケ・ヨシモトの4人組は通常Aなら設定4以上。</p></div>
+
+<div class="card"><h2>ハルルナPUSH</h2><div class="grid"><label>出現回数（設定4以上示唆）</label><input id="haru" type="number"></div></div>
+
+<div class="card"><h2>打-WIN LITE 隠れ凪</h2><div class="grid">
+<label>青（設定2以上）</label><input id="n2" type="number"><label>緑（設定3以上）</label><input id="n3" type="number">
+<label>赤（設定4以上）</label><input id="n4" type="number"><label>銀（設定5以上）</label><input id="n5" type="number">
+<label>金（設定6）</label><input id="n6" type="number"></div></div>
+
+<div class="card"><h2>エンディング ゴエモンボイス</h2><div class="grid">
+<label>設定2否定</label><input id="vnot2" type="number"><label>設定3否定</label><input id="vnot3" type="number">
+<label>設定2以上</label><input id="v2" type="number"><label>設定3以上</label><input id="v3" type="number">
+<label>設定4以上</label><input id="v4" type="number"><label>設定5以上</label><input id="v5" type="number">
+<label>設定6</label><input id="v6" type="number"><label>奇数示唆</label><input id="vo" type="number">
+<label>偶数示唆</label><input id="ve" type="number"></div></div>
+
+<div class="card"><button id="calc" class="primary">設定推測を計算</button><button id="clear" class="clear">入力をクリア</button></div>
+<div id="result"></div>
+<div class="card"><p class="small">公開値：AT初当たり 設定1～6=1/359.5, 350.8, 332.5, 302.8, 281.0, 262.9。乙女アタック=20.3%,21.4%,23.2%,24.7%,25.2%,25.7%。戦国乙女BONUS=1/21206.7,15648.9,13143.5,8143.4,6427.6,5502.7。小役は全設定共通のため計算には使用しません。</p></div>
+</main>
+<script>
+const A=[359.5,350.8,332.5,302.8,281,262.9],P=[.203,.214,.232,.247,.252,.257],B=[21206.7,15648.9,13143.5,8143.4,6427.6,5502.7];
+const ids=['s2','s3','s4','s5','s6','m2','m3','m4','m5','m6','eg','er','e4','haru','n2','n3','n4','n5','n6','v2','v3','v4','v5','v6'];
+const N=id=>Math.max(0,Number(document.getElementById(id).value)||0);
+function bin(k,n,p){if(!n||!k)return 0;if(k>n)return -Infinity;return k*Math.log(p)+(n-k)*Math.log(1-p)}
+function run(){
+ let l=[0,0,0,0,0,0],g=N('g'),at=N('at'),ob=N('ob'),pt=N('pt'),ack=N('ack');
+ for(let i=0;i<6;i++){
+  if(g&&at)l[i]+=bin(at,g,1/A[i]);if(g&&ob)l[i]+=bin(ob,g,1/B[i]);if(pt)l[i]+=bin(ack,pt,P[i]);
+  const lows=[N('s2'),N('s3'),N('s4'),N('s5'),N('s6'),N('m2'),N('m3'),N('m4'),N('m5'),N('m6'),N('eg'),N('er'),N('e4'),N('haru'),N('n2'),N('n3'),N('n4'),N('n5'),N('n6'),N('v2'),N('v3'),N('v4'),N('v5'),N('v6')];
+  const mins=[2,3,4,5,6,2,3,4,5,6,2,4,4,4,2,3,4,5,6,2,3,4,5,6];
+  for(let j=0;j<lows.length;j++)if(lows[j]&&i+1<mins[j])l[i]=-Infinity;
+  if(N('vnot2')&&i===1)l[i]=-Infinity;if(N('vnot3')&&i===2)l[i]=-Infinity;
+  if(N('vo'))l[i]+=(i%2===0?Math.log(.65):Math.log(.35))*N('vo');
+  if(N('ve'))l[i]+=(i%2===1?Math.log(.65):Math.log(.35))*N('ve');
+ }
+ if(l.every(x=>!Number.isFinite(x))){document.getElementById('result').innerHTML='<div class="card warn">入力した示唆に矛盾があります。設定否定・以上示唆を確認してください。</div>';return}
+ let mx=Math.max(...l),w=l.map(x=>Number.isFinite(x)?Math.exp(x-mx):0),z=w.reduce((a,b)=>a+b,0),q=w.map(x=>100*x/z),best=q.indexOf(Math.max(...q))+1;
+ let h='<div class="card"><h2>判別結果</h2><div class="result">設定'+best+'：'+q[best-1].toFixed(1)+'%</div><div class="bar"><i style="width:'+q[best-1]+'%"></i></div><table><tr><th>設定</th><th>推定割合</th></tr>';
+ q.forEach((x,i)=>h+='<tr><td>設定'+(i+1)+'</td><td>'+x.toFixed(1)+'%</td></tr>');h+='</table><p class="small">※公式の設定期待度ではなく、公開された設定差と設定示唆を使った簡易ベイズ推定です。正確な示唆出現率が公開されていない項目は設定の下限/否定として扱っています。</p></div>';
+ document.getElementById('result').innerHTML=h;
+}
+document.getElementById('calc').onclick=run;document.getElementById('clear').onclick=()=>{document.querySelectorAll('input').forEach(x=>x.value='');document.getElementById('result').innerHTML=''};
+</script></body></html>
